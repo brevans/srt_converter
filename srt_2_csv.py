@@ -49,13 +49,15 @@ def parse_srt(fn):
         d['Time_of_Day']=str(atomic_time+datetime.strptime(d['Time_Stamp'], "%H:%M:%S.%f")).split(' ')[1]
     return data_out
 
-def data_2_csv:
+def data_2_csv(fn, data_out):
     csv_out = open(fn.replace('.srt','.csv'), 'w')
     csv_out.write(','.join(all_columns)+'\n')
     for datum in data_out:
         csv_out.write(','.join([datum[x] if x in datum else 'NA' for x in all_columns])+'\n')
     csv_out.close()
+
 if __name__ == "__main__":
     for srt in glob('*.srt'):
         dout = parse_srt(srt)
         data_2_csv(srt, dout)
+        
