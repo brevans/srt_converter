@@ -34,7 +34,7 @@ def parse_srt(fn):
         try:
             caption_number = next(fh).rstrip("\n")
             time_stamp = next(fh).split(' --> ')[0].replace(',','.')
-            data = [x.rstrip().lstrip() for x in next(fh).split(';')]
+            data = [x.lstrip().rstrip() for x in next(fh).rstrip().rstrip(';').lstrip().split(';')]
             toss_me = next(fh)
             #every data line is caption number, time_stamp + its fields
             data_in.append([caption_number, time_stamp]+data)
@@ -53,6 +53,7 @@ def parse_srt(fn):
                 ind_pos = dict(zip(ind_pos_columns, [bid, stn, xoff, yoff]))
                 ind_pos['Lek_Date'] = lek_date_id
                 ind_pos['Time_Stamp'] = d[1]
+                positions.append(ind_pos)
        
         elif len(d) >= len(end_columns):
             if d[4] == 'start':
