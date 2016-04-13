@@ -54,8 +54,7 @@ def parse_srt(fn):
                 ind_pos['Lek_Date'] = lek_date_id
                 ind_pos['Time_Stamp'] = d[1]
                 positions.append(ind_pos)
-       
-        elif len(d) >= len(end_columns):
+        if len(d) >= 5:
             if d[4] == 'start':
                 assert len(start_columns) == len(d), "Number of columns doesn't match for a start at caption number {}.".format(d[0])
                 interactions.append(dict(zip(start_columns, d)))
