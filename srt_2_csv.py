@@ -43,29 +43,40 @@ def parse_srt(fn):
 
     interactions = []
     positions = []
+    atomic_time = None
     for d in data_in:
         if d[2] == 'Atomic_clock': #get atomic time, offset
             atomic_time = (datetime.strptime(d[3], "%H:%M:%S")-
                            datetime.strptime(d[1], "%H:%M:%S.%f"))
-        elif d[2] == 'Position': #parse out individual positions
+        if ('Position' in d) or ('position' in d): #parse out individual positions
             assert (len(d)-3)%len(ind_pos_columns)==0, " Wrong number of bird position fields at caption number {}".format(d[0])
-            for (bid, stn, xoff, yoff) in zip(d[3::4],d[4::4],d[5::4],d[6::4]):
-                ind_pos = dict(zip(ind_pos_columns, [bid, stn, xoff, yoff]))
-                ind_pos['Lek_Date'] = lek_date_id
-                ind_pos['Time_Stamp'] = d[1]
-                positions.append(ind_pos)
-        if len(d) >= 5:
-            if d[4] == 'start':
-                assert len(start_columns) == len(d), "Number of columns doesn't match for a start at caption number {}.".format(d[0])
-                interactions.append(dict(zip(start_columns, d)))
-            elif d[4] == 'end':
-                assert len(end_columns) == len(d), "Number of columns doesn't match for an end at caption number {}.".format(d[0])
-                interactions.append(dict(zip(end_columns, d)))
+            try:
+                for (bid, stn, xoff, yoff) in zip(d[3::4],d[4::4],d[5::4],d[6::4]):
+                    ind_pos = dict(zip(ind_pos_columns, [bid, stn, xoff, yoff]))
+                    ind_pos['Lek_Date'] = lek_date_id
+                    ind_pos['Time_Stamp'] = d[1]
+                    positions.append(ind_pos)
+            except Exception as e:
+                print("something looks wrong with your position data at caption {}: {}".format(d[0], e))
 
+        if ('start' in d) or ('stop' in d):
+            try:
+                if d[4] == 'start':
+                    assert len(start_columns) == len(d), "Number of columns doesn't match for a start at caption number {}.".format(d[0])
+                    interactions.append(dict(zip(start_columns, d)))
+                elif d[4] == 'end':
+                    assert len(end_columns) == len(d), "Number of columns doesn't match for an end at caption number {}.".format(d[0])
+                    interactions.append(dict(zip(end_columns, d)))
+            except Exception as e:
+                print("something looks wrong with your start or stop at caption {}: {}".format(d[0], e))
+    
+    assert atomic_time is not None, "Didn't find an atomic time entry, can't calulate proper Time_of_Day!"
+    
     for i in interactions:
         i['Time_of_Day']=str(atomic_time+datetime.strptime(i['Time_Stamp'], "%H:%M:%S.%f")).split(' ')[1].split('.')[0]
     for p in positions:
         p['Time_of_Day']=str(atomic_time+datetime.strptime(p['Time_Stamp'], "%H:%M:%S.%f")).split(' ')[1].split('.')[0]
+
     return interactions, positions
 
 def data_2_csv(fn, interactions, positions):
