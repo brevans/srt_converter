@@ -38,8 +38,8 @@ Atomic_clock; 6:46:11;
 
 ```
 Text fields (must be exactly two):
-1. The text "Atomic_clock"
-2. The local time, measured in Hours:Minutes:Seconds
+1. The text "Atomic_clock"  
+2. The local time, measured in Hours:Minutes:Seconds  
 
 _**Position:**_
 ```
@@ -54,7 +54,7 @@ Text fields (First field, then mutiples of 4):
 3. Grid stake ID
 4. X Offset relative to stake
 5. Y Offset relative to stake  
-Repeat 2-5
+Repeat 2-5  
 
 _**Interactions:**_  
 There are two types of interaction captions that get parsed.  
@@ -66,19 +66,19 @@ _**start:**_
 
 ```
 Text fields (First field, then mutiples of 4):
-1. Initiator ID
-2. Interaction Number
-3. The text "start"
-4. Partner ID
-5. Initiator stake
-6. Initiator X offset relative to initiator stake
-7. Initiator Y offset relative to initiator stake
-8. Partner stake
-9. Partner X offset relative to partner stake
-10. Partner Y offset relative to partner stake
-11. Females Present
-12. Reaction Code
-13. Other notes
+1. Initiator ID  
+2. Interaction Number  
+3. The text "start"  
+4. Partner ID  
+5. Initiator stake  
+6. Initiator X offset relative to initiator stake  
+7. Initiator Y offset relative to initiator stake  
+8. Partner stake  
+9. Partner X offset relative to partner stake  
+10. Partner Y offset relative to partner stake  
+11. Females Present  
+12. Reaction Code  
+13. Other notes  
 
 _**end:**_
 ```
@@ -88,14 +88,14 @@ _**end:**_
 
 ```
 Text fields (exactly 8):
-1. Initiator ID
-2. Interaction Number
-3. The text "end"
-4. Partner ID
-5. Disengager ID
-6. Bouts Of Smacking: a number
-7. Face off: either either FO, CH or NA
-8. Other notes
+1. Initiator ID  
+2. Interaction Number  
+3. The text "end"  
+4. Partner ID  
+5. Disengager ID  
+6. Bouts Of Smacking: a number  
+7. Face off: either either FO, CH or NA  
+8. Other notes  
 
 
 ## Output
