@@ -21,7 +21,7 @@ start_columns = ['caption_number', 'Caption_Stamp', 'Initiator_ID',
 
 end_columns = ['caption_number', 'Caption_Stamp', 'Initiator_ID', 
                'Interaction_Number', 'Data_Type', 'Partner_ID', 
-               'Disengager_ID', 'Bouts_O_Smacking', 'Other_notes']
+               'Disengager_ID', 'Bouts_O_Smacking', 'Face_Off', 'Other_notes']
                
 ind_pos_columns = ['Bird_ID', 'Grid_Stake', 'X_Offset', 'Y_Offset']
 
