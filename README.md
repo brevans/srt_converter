@@ -2,7 +2,7 @@
 
 For the bird man Sam Snow.
 
-run this python script in a directory with exported .srt caption files to get more usable data.
+run this python script in a directory with exported .srt caption files to get more usable data. It tries to mkae sure data are handled correctly, but there are probably bugs. It should complain if there is something obvioulsy wrong. In this case, don't trust output until there are no errors for the file in question.
 
 ```bash
 python srt_2_csv.py
@@ -76,7 +76,7 @@ Text fields (First field, then mutiples of 4):
 8. Partner stake  
 9. Partner X offset relative to partner stake  
 10. Partner Y offset relative to partner stake  
-11. Females Present  
+11. Females Present: Y or N  
 12. Reaction Code  
 13. Other notes  
 
@@ -94,7 +94,7 @@ Text fields (exactly 8):
 4. Partner ID  
 5. Disengager ID  
 6. Bouts Of Smacking: a number  
-7. Face off: either either FO, CH or NA  
+7. Face off: either FO, CH or NA  
 8. Other notes  
 
 
@@ -105,7 +105,7 @@ The output files are:
 
 #### Interactions output file columns:
 1. **Lek_Date_ID**: the first portion of the file name, if split by underscores. e.g. "CHG20140326"
-2. **Time_Stamp**: Date and time, based on atomic clock in video, with no timezone, in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format
+2. **Time_Stamp**: Date and time of interaction _start_, based on atomic clock in video, with no timezone, in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format
 3. **Initiator_ID**: should match between start and end entry
 4. **Interaction_Number**: should match between start and end entry
 5. **Partner_ID**: should match between start and end entry
@@ -113,12 +113,13 @@ The output files are:
 7. **Reaction_Code**: from start entry
 8. **Disengager_ID**: from end entry
 9. **Bouts_O_Smacking**: from end entry
-10. **Duration**: end - start times
-11. **Initiator_Cartesian_X**: corrected initiator X coordinate, based on stake_coords.csv
-12. **Initiator_Cartesian_Y**: corrected initiator Y coordinate, based on stake_coords.csv
-13. **Partner_Cartesian_X**: corrected partner Y coordinate, based on stake_coords.csv
-14. **Partner_Cartesian_Y**: corrected partner Y coordinate, based on stake_coords.csv
-15. **Other_notes**: notes from both start and end
+10. **Face_Off**: either FO, CH or NA
+11. **Duration**: end - start times in seconds
+12. **Initiator_Cartesian_X**: corrected initiator X coordinate, based on stake_coords.csv
+13. **Initiator_Cartesian_Y**: corrected initiator Y coordinate, based on stake_coords.csv
+14. **Partner_Cartesian_X**: corrected partner Y coordinate, based on stake_coords.csv
+15. **Partner_Cartesian_Y**: corrected partner Y coordinate, based on stake_coords.csv
+16. **Other_notes**: notes from both start and end
 
 #### Positions output columns:
 1. **Lek_Date_ID**: the first portion of the file name, if split by underscores. e.g. "CHG20140326"
