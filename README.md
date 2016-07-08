@@ -37,7 +37,7 @@ _**Atomic_Clock:**_
 Atomic_clock; 6:46:11;
 
 ```
-Text fields (must be exactly two):
+Text fields (must be exactly two):  
 1. The text "Atomic_clock"  
 2. The local time, measured in Hours:Minutes:Seconds  
 
@@ -48,11 +48,11 @@ _**Position:**_
 Position; 705; H5; 2.5; 6.5; 351; H6; 6.5; 1; 315; H5; 7; 9; 710; H6; 9; 0; 340; H5; 9.5; 9.5; 702; I6; 0; 0
 
 ```
-Text fields (First field, then mutiples of 4):
-1. The text "Position"
-2. Bird ID
-3. Grid stake ID
-4. X Offset relative to stake
+Text fields (First field, then mutiples of 4):  
+1. The text "Position"  
+2. Bird ID  
+3. Grid stake ID  
+4. X Offset relative to stake  
 5. Y Offset relative to stake  
 Repeat 2-5  
 
@@ -65,7 +65,7 @@ _**start:**_
 710; 3; start; 702; H6; 7.5; 1; I6; 0; 0;Y; SI; #strutting interrupted from a distance
 
 ```
-Text fields (First field, then mutiples of 4):
+Text fields (First field, then mutiples of 4):  
 1. Initiator ID  
 2. Interaction Number  
 3. The text "start"  
@@ -87,7 +87,7 @@ _**end:**_
 710; 2; end; 702; 710; 2; FO; #unclear who disengages
 
 ```
-Text fields (exactly 8):
+Text fields (exactly 8):  
 1. Initiator ID  
 2. Interaction Number  
 3. The text "end"  
@@ -99,8 +99,7 @@ Text fields (exactly 8):
 
 
 ## Output
-The output files are:
-
+The output files are:  
  * < input filename >_interactions.csv
  * < input filename >_positions.csv
 
@@ -120,8 +119,6 @@ The output files are:
 13. **Partner_Cartesian_X**: corrected partner Y coordinate, based on stake_coords.csv
 14. **Partner_Cartesian_Y**: corrected partner Y coordinate, based on stake_coords.csv
 15. **Other_notes**: notes from both start and end
-
-
 
 #### Positions output columns:
 1. **Lek_Date_ID**: the first portion of the file name, if split by underscores. e.g. "CHG20140326"
