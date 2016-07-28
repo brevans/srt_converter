@@ -76,17 +76,20 @@ def parse_srt(fn, stake_fn):
                     positions.append(ind_pos)
             except Exception as e:
                 print("something looks wrong with your position data at caption {}: {} \n   in file {}".format(d[0], e, fn))
-
-        if len(d) >= len(end_columns) and (d[4].lower()=='start' or d[4].lower()=='end'):
+                sys.exit(1)
+                
+        start_stop_loc = 4
+        if len(d) > start_stop_loc and (d[start_stop_loc].lower()=='start' or d[start_stop_loc].lower()=='end'):
             try:
-                if d[4].lower() == 'start':
+                if d[start_stop_loc].lower() == 'start':
                     assert len(start_columns) == len(d), "Number of columns doesn't match."
                     start_ints.append(dict(zip(start_columns, d)))
-                if d[4].lower() == 'end':
+                if d[start_stop_loc].lower() == 'end':
                     assert len(end_columns) == len(d), "Number of columns doesn't match."
                     end_ints.append(dict(zip(end_columns, d)))
             except Exception as e:
                 print("something looks wrong with your start or stop at caption {}: {} \n    in file {}".format(d[0], e, fn))
+                sys.exit(1)
     
     assert atomic_time is not None, "Didn't find an atomic time entry in file {}, can't calulate proper Time_Stamp!".format(fn)
     
@@ -128,16 +131,16 @@ def parse_srt(fn, stake_fn):
     return sorted(interactions, key=itemgetter('Time_Stamp')), positions
 
 def data_2_csv(fn, interactions, positions):
-    csv_inte = open(fn.replace('.srt','_interactions.csv'), 'w')
-    csv_inte.write(','.join(interaction_columns)+'\n')
+    csv_inte = open(fn.replace('.srt','_interactions.tsv'), 'w')
+    csv_inte.write('\t'.join(interaction_columns)+'\n')
     for inter in interactions:
-        csv_inte.write(','.join([inter[x] for x in interaction_columns])+'\n')
+        csv_inte.write('\t'.join([inter[x] for x in interaction_columns])+'\n')
     csv_inte.close()
     
-    csv_posi = open(fn.replace('.srt','_positions.csv'), 'w')
-    csv_posi.write(','.join(pos_columns)+'\n')
+    csv_posi = open(fn.replace('.srt','_positions.tsv'), 'w')
+    csv_posi.write('\t'.join(pos_columns)+'\n')
     for posi in positions:
-        csv_posi.write(','.join([posi[x] for x in pos_columns])+'\n')
+        csv_posi.write('\t'.join([posi[x] for x in pos_columns])+'\n')
     csv_posi.close()
     
 
